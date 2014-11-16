@@ -24,7 +24,7 @@ if (fs.existsSync(envFile)) {
  */
 
 module.exports = {
-  db: 'mongodb://javasop:osamah1989@ds043190.mongolab.com:43190/because',
+  db: "mongodb://javasop:osamah1989@ds051630.mongolab.com:51630/branchit",
   facebook: {
     clientID: process.env.FACEBOOK_CLIENTID,
     clientSecret: process.env.FACEBOOK_SECRET,
