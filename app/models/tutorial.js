@@ -16,25 +16,19 @@ var Schema = mongoose.Schema;
 
 
 /**
- * Post Schema
+ * Tutorial Schema
  */
 
 //TODO: mix website model here?
-//but we don't want to sent all information back to client?
-//what about feedback sub-document?
-var PostSchema = new Schema({
-    post_url: {type: String, trim: true},
+var TutorialSchema = new Schema({
+    //this will be the generated tutorial url where users can access the content or embed it in their site
+    url: {type: String, trim: true},
+    title:{type: String, trim: true},
     website_id: {type: Schema.ObjectId, ref: 'Website'},
-    poll_title: {type: String, default: '', trim: true},
-    poll_options:[{
-           title:{type:Array}
-        }],
-    poll_status :{type: String, default: 'draft', trim: true},
     comment: [{
             content: {type: String, default: ''},
             user: {type: Schema.ObjectId, ref: 'User'},
             createdAt: {type: Date, default: Date.now},
-            poll_option: {type:String}
     }],
     createdAt: {type: Date, default: Date.now}
 });
@@ -43,13 +37,13 @@ var PostSchema = new Schema({
  * Validations
  */
 
-//PostSchema.path('title').required(true, 'Post title cannot be blank');
+//TutorialSchema.path('title').required(true, 'Tutorial title cannot be blank');
 
 /**
  * Pre-remove hook
  */
 
-PostSchema.pre('remove', function(next) {
+TutorialSchema.pre('remove', function(next) {
     next();
 });
 
@@ -57,7 +51,7 @@ PostSchema.pre('remove', function(next) {
  * Methods
  */
 
-PostSchema.methods = {
+TutorialSchema.methods = {
     /**
      * Save article and upload image
      *
@@ -118,7 +112,7 @@ PostSchema.methods = {
  * Statics
  */
 
-PostSchema.statics = {
+TutorialSchema.statics = {
     /**
      * Find article by id
      *
@@ -153,4 +147,4 @@ PostSchema.statics = {
     }
 }
 
-mongoose.model('Post', PostSchema);
+mongoose.model('Tutorial', TutorialSchema);
