@@ -3,7 +3,7 @@
  */
 
 var mongoose = require('mongoose');
-var Post = mongoose.model('Post');
+var Post = mongoose.model('Tutorial');
 
 /**
  * List items tagged with a tag

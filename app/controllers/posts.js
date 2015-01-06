@@ -4,7 +4,7 @@
  */
 
 var mongoose = require('mongoose')
-var Post = mongoose.model('Post')
+var Post = mongoose.model('Tutorial')
 var utils = require('../../lib/utils')
 var extend = require('util')._extend
 
@@ -15,7 +15,6 @@ var extend = require('util')._extend
 exports.load = function (req, res, next, id){
     
   var User = mongoose.model('User');
-
   Post.load(id, function (err, post) {
     if (err) return next(err);
     if (!post) return next(new Error('not found'));
@@ -132,7 +131,8 @@ exports.show = function (req, res){
   res.render('posts/show', {
     title: req.post.title,
     post: req.post
-  });
+  }
+  );
 };
 
 /**
