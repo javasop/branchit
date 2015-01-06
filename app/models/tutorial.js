@@ -24,12 +24,15 @@ var TutorialSchema = new Schema({
     //this will be the generated tutorial url where users can access the content or embed it in their site
     url: {type: String, trim: true},
     title:{type: String, trim: true},
-    website_id: {type: Schema.ObjectId, ref: 'Website'},
+    owner:{type: Schema.ObjectId, ref: 'User'},
+    learners:[{type: Schema.ObjectId, ref: 'User'}],
+    concepts:[{type: Schema.ObjectId, ref: 'Concept'}],
     comment: [{
             content: {type: String, default: ''},
             user: {type: Schema.ObjectId, ref: 'User'},
             createdAt: {type: Date, default: Date.now},
     }],
+    meta: Schema.Types.Mixed,
     createdAt: {type: Date, default: Date.now}
 });
 

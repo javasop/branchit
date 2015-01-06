@@ -10,16 +10,12 @@ var Schema = mongoose.Schema;
 
 
 /**
- * Concept Schema
+ * Template Schema
  */
 
-var ConceptSchema = new Schema({
-    title:{type: String, trim: true},
-    contributors:[{type: Schema.ObjectId, ref: 'User'}],
-    explanations: Schema.Types.Mixed,
-    examples: Schema.Types.Mixed,
-    excercises: Schema.Types.Mixed,
-    createdAt: {type: Date, default: Date.now}
+var TemplateSchema = new Schema({
+
+   createdAt: {type: Date, default: Date.now}
 });
 /**
  * Validations
@@ -30,14 +26,14 @@ var ConceptSchema = new Schema({
  * Pre-remove hook
  */
 
-ConceptSchema.pre('remove', function(next) {
+TemplateSchema.pre('remove', function(next) {
     next();
 });
 /**
  * Methods
  */
 
-ConceptSchema.methods = {
+TemplateSchema.methods = {
     /**
      * Save article and upload image
      *
@@ -72,7 +68,7 @@ ConceptSchema.methods = {
  * Statics
  */
 
-ConceptSchema.statics = {
+TemplateSchema.statics = {
     /**
      * Find article by id
      *
@@ -107,4 +103,4 @@ ConceptSchema.statics = {
     }
 }
 
-mongoose.model('Concept', ConceptSchema);
+mongoose.model('Template', TemplateSchema);
