@@ -2,12 +2,11 @@
  * Module dependencies.
  */
 
-// Note: We can require users, posts and other cotrollers because we have
+// Note: We can require users, tutorials and other cotrollers because we have
 // set the NODE_PATH to be ./app/controllers (package.json # scripts # start)
 
 var users = require('users');
-var posts = require('posts');
-var feedbacks = require('feedbacks');
+var tutorials = require('tutorials');
 var tags = require('tags');
 var auth = require('./middlewares/authorization');
 
@@ -15,8 +14,7 @@ var auth = require('./middlewares/authorization');
  * Route middlewares
  */
 
-var postAuth = [auth.requiresLogin, auth.post.hasAuthorization];
-var feedbackAuth = [auth.requiresLogin, auth.feedback.hasAuthorization];
+var tutorialAuth = [auth.requiresLogin, auth.tutorial.hasAuthorization];
 
 /**
  * Expose routes
@@ -35,7 +33,6 @@ module.exports = function (app, passport) {
       failureRedirect: '/fail',
       failureFlash: 'Invalid email or password.'
     }));
-  app.get('/users/:userId', users.show);
   app.get('/auth/facebook',
     passport.authenticate('facebook', {
       scope: [ 'email', 'user_about_me'],
@@ -87,25 +84,40 @@ module.exports = function (app, passport) {
 
   app.param('userId', users.load);
 
-  // Post routes
-  app.param('id', posts.load);
-  app.get('/posts', posts.index);
-  app.get('/posts/new', auth.requiresLogin, posts.new);
-  app.post('/posts', auth.requiresLogin, posts.create);
-  app.get('/posts/:id', posts.show);
-  app.get('/posts/:id/edit', postAuth, posts.edit);
-  app.put('/posts/:id', postAuth, posts.update);
-  app.delete('/posts/:id', postAuth, posts.destroy);
+  // Tutorials routes
+  app.param('id', tutorials.load);
+  app.get('/tutorials', tutorials.index);
+  app.get('/tutorials/new', auth.requiresLogin, tutorials.new);
+  app.post('/tutorials', auth.requiresLogin, tutorials.create);
+  app.get('/tutorials/:id', tutorials.show);
+  app.get('/tutorials/:id/edit', tutorialAuth, tutorials.edit);
+  app.put('/tutorials/:id', tutorialAuth, tutorials.update);
+  app.delete('/tutorials/:id', tutorialAuth, tutorials.destroy);
 
   // home route
-  app.get('/', posts.index);
+  app.get('/', function(req,res){
+	//list of routes
+	routes = app._router.stack;
+	var myroutes =[{}];
 
-  // feedback routes
+	routes.forEach(function(el){
+	if(el.route){
+	r = {};
+	r.url =  el.route.path
+	r.method = el.route.methods;
+	console.log(r.url,r.method);
+	}
+	})
+	res.send("Welcome to Branchit, the new frontier of modern education ");
+        	
+  });
+
+  /** feedback routes
   app.param('feedbackId', feedbacks.load);
-  app.post('/posts/:id/feedbacks', auth.requiresLogin, feedbacks.create);
-  app.get('/posts/:id/feedbacks', auth.requiresLogin, feedbacks.create);
-  app.delete('/posts/:id/feedbacks/:feedbackId', feedbackAuth, feedbacks.destroy);
-
+  app.tutorial('/tutorials/:id/feedbacks', auth.requiresLogin, feedbacks.create);
+  app.get('/tutorials/:id/feedbacks', auth.requiresLogin, feedbacks.create);
+  app.delete('/tutorials/:id/feedbacks/:feedbackId', feedbackAuth, feedbacks.destroy);
+  **/
   // tag routes
   app.get('/tags/:tag', tags.index);
 

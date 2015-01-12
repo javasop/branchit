@@ -26,9 +26,9 @@ exports.user = {
  *  Feedback authorization routing middleware
  */
 
-exports.post = {
+exports.tutorial = {
   hasAuthorization: function (req, res, next) {
-    if (req.post.user.id != req.user.id) {
+    if (req.tutorial.user.id != req.user.id) {
       req.flash('info', 'You are not authorized')
       return res.redirect('/posts/' + req.post.id)
     }
@@ -36,19 +36,3 @@ exports.post = {
   }
 }
 
-/**
- * Feedback authorization routing middleware
- */
-
-exports.feedback = {
-  hasAuthorization: function (req, res, next) {
-    // if the current user is feedback owner or post owner
-    // give them authority to delete
-    if (req.user.id === req.feedback.user.id || req.user.id === req.post.user.id) {
-      next()
-    } else {
-      req.flash('info', 'You are not authorized')
-      res.redirect('/posts/' + req.post.id)
-    }
-  }
-}

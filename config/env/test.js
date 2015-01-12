@@ -4,7 +4,7 @@
  */
 
 module.exports = {
-  db: 'mongodb://localhost/noobjs_test',
+  db: "mongodb://javasop:osamah1989@ds051630.mongolab.com:51630/branchit",
   facebook: {
     clientID: process.env.FACEBOOK_CLIENTID,
     clientSecret: process.env.FACEBOOK_SECRET,

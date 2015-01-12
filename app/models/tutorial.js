@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -64,7 +63,7 @@ TutorialSchema.methods = {
      */
 
     uploadAndSave: function(images, cb) {
-        
+
     },
     /**
      * Add comment

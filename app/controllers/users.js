@@ -26,41 +26,28 @@ exports.load = function (req, res, next, id) {
 /**
  * Create user
  */
-
 exports.create = function (req, res) {
   var user = new User(req.body);
   user.provider = 'local';
   user.save(function (err) {
     if (err) {
-      return res.render('users/signup', {
+       res.status(500);
+       res.send( {
         error: utils.errors(err.errors),
-        user: user,
-        title: 'Sign up'
+        user: user
       });
     }
     res.send(200);
   });
 };
 
-/**
- *  Show profile
- */
-
-exports.show = function (req, res) {
-  var user = req.profile;
-  res.render('users/show', {
-    title: user.name,
-    user: user
-  });
-};
-
-exports.signin = function (req, res) {};
+//exports.signin = function (req, res) {};
 
 /**
  * Auth callback
  */
-
 exports.authCallback = login;
+exports.signin = function(req,res){};
 
 /**
  * Show login form
@@ -74,16 +61,6 @@ exports.success = function (req, res) {
   res.send(200).end();
 };
 
-/**
- * Show sign up form
- */
-
-exports.signup = function (req, res) {
-  res.render('users/signup', {
-    title: 'Sign up',
-    user: new User()
-  });
-};
 
 /**
  * Logout
