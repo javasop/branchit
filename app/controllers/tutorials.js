@@ -13,7 +13,6 @@ var extend = require('util')._extend
  */
 
 exports.load = function (req, res, next, id){
-
   var User = mongoose.model('User');
   Tutorial.load(id, function (err, tutorial) {
     if (err) return next(err);

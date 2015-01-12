@@ -18,7 +18,7 @@ var ConceptSchema = new Schema({
     contributors:[{type: Schema.ObjectId, ref: 'User'}],
     explanations: Schema.Types.Mixed,
     examples: Schema.Types.Mixed,
-    excercises: Schema.Types.Mixed,
+    exercises: Schema.Types.Mixed,
     createdAt: {type: Date, default: Date.now}
 });
 /**

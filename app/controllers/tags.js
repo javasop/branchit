@@ -3,7 +3,7 @@
  */
 
 var mongoose = require('mongoose');
-var Post = mongoose.model('Tutorial');
+var Tutorial = mongoose.model('Tutorial');
 
 /**
  * List items tagged with a tag
@@ -19,12 +19,12 @@ exports.index = function (req, res) {
     criteria: criteria
   };
 
-  Post.list(options, function(err, posts) {
+  Tutorial.list(options, function(err, tutorials) {
     if (err) return res.render('500');
-    Post.count(criteria).exec(function (err, count) {
-      res.render('posts/index', {
-        title: 'Posts tagged ' + req.param('tag'),
-        posts: posts,
+    Tutorial.count(criteria).exec(function (err, count) {
+      res.render('tutorials/index', {
+        title: 'Tutorials tagged ' + req.param('tag'),
+        tutorials: tutorials,
         page: page + 1,
         pages: Math.ceil(count / perPage)
       });
