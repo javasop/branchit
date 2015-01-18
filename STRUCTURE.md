@@ -4,4 +4,7 @@ modules register routes, there's an end point that will handle giving all the re
 
 pass running app to the module and the module will handle hooking route to it.
 
+for Models or IO, a module will handle the connection and will register all the model schemes for the application
+
+global config files handles environment specific options, such as connection info, port, 
 

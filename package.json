@@ -27,7 +27,8 @@
     "less-middleware": "*",
     "underscore": "1.x",
     "metalogger": "*",
-    "passport": "~0.2.1"
+    "passport": "~0.2.1",
+    "mongoose": "~3.8.21"
   },
   "devDependencies": {
     "after": "^0.8.1",
