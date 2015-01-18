@@ -9,12 +9,23 @@
 // Third-party libraries
 var express = require('express')
   , mongoose = require('mongoose')
+  , fs = require('fs')
   , exports = module.exports = express()
-  , app = exports;
+  , app = exports
 
 require('./setup/mongoose')(mongoose);
 
-//register all the schemes
 
+console.log("hello there");
 
+//export all the schemas as objects after registering them 
+fs.readdirSync(__dirname + '/schemes/').forEach(function (file) {
+  //ignore files with name "index"
+  if (~file.indexOf('.js') && file.indexOf('index') == -1){
+	  filename = __dirname + '/schemes/' + file;
+	  var obj =  require(filename)
+	  var ffile = file.replace(".js","");
+	  exports[ffile] = obj; 
+  }
 
+});

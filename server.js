@@ -6,7 +6,6 @@ require('nodebootstrap-server').setup(function(runningApp) {
 
   runningApp.use('/auth',require('auth'));
 
-
   runningApp.use(require('routes')); // attach to root rout
 
   runningApp.use(require('eyeo')); 

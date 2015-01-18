@@ -1,6 +1,7 @@
 var exports = module.exports;
 
 var greeter   = require('../models/greeter');
+var eyeo = require("eyeo");
 
 exports.sayHello = function(req, res) {
 

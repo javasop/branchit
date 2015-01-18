@@ -24,4 +24,4 @@ exports.models       = require('./models');
 //app.engine('handlebars', hbs.__express);
 
 // Module's Routes. Please note this is actually under /hello, because module is attached under /hello
-app.get('/Howdy', exports.callbacks.sayHello);
+app.get('/', exports.callbacks.sayHello);
