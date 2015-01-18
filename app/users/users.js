@@ -22,8 +22,8 @@ app.use(passport.initialize());
 
 
 // Don't just use, but also export in case another module needs to use these as well.
-exports.callbacks    = require('./controllers/auth');
+exports.callbacks    = require('./controllers/users');
 exports.models       = require('./models'); 
 
-// Module's Routes. Please note this is actually under /auth, because module is attached under /hello
+// Module's Routes. Please note this is actually under /users, because module is attached under /hello
 app.get('/', exports.callbacks.sayHello);
