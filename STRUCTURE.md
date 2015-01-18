@@ -9,8 +9,8 @@ global config files handles environment specific options, such as connection inf
 
 TODO: 
 Finishing up CRUD
-Routes display
-ACL module
+Routes display: Implement HATEOAS
+ACL module: check the authorization to access based on passport?
 
 
 

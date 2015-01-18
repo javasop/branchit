@@ -15,9 +15,6 @@ var express = require('express')
 
 require('./setup/mongoose')(mongoose);
 
-
-console.log("hello there");
-
 //export all the schemas as objects after registering them 
 fs.readdirSync(__dirname + '/schemes/').forEach(function (file) {
   //ignore files with name "index"

@@ -26,4 +26,5 @@ exports.callbacks    = require('./controllers/users');
 exports.models       = require('./models'); 
 
 // Module's Routes. Please note this is actually under /users, because module is attached under /hello
-app.get('/', exports.callbacks.sayHello);
+app.post('/users', exports.callbacks.register);
+app.post('/users/login', exports.callbacks.login);

@@ -2,9 +2,9 @@ require('nodebootstrap-server').setup(function(runningApp) {
 
   //---- Mounting well-encapsulated application modules
   //---- See: http://vimeo.com/56166857
-  runningApp.use('/hello',require('hello')); // attach to sub-route
+  runningApp.use('/users',require('users'));
 
-  runningApp.use('/auth',require('auth'));
+  runningApp.use('/tutorials',require('tutorials')); // attach to sub-route
 
   runningApp.use(require('routes')); // attach to root rout
 

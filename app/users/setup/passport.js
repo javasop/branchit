@@ -3,11 +3,11 @@
  * Module dependencies.
  */
 
-//var mongoose = require('mongoose');
-//var LocalStrategy = require('passport-local').Strategy;
-//var User = mongoose.model('User');
+var eyeo = require('eyeo');
+var LocalStrategy = require('passport-local').Strategy;
+var User = eyeo.user;;
 
-//var local = require('./passport/local');
+var local = require('./strategies/local');
 //var google = require('./passport/google');
 //var facebook = require('./passport/facebook');
 //var twitter = require('./passport/twitter');
@@ -19,7 +19,7 @@
  */
 
 module.exports = function (passport) {
-  /* serialize sessions
+  // serialize sessions
   passport.serializeUser(function(user, done) {
     done(null, user.id)
   })
@@ -29,9 +29,10 @@ module.exports = function (passport) {
       done(err, user)
     })
   })
- */
-  /* use these strategies
+ 
+  // use these strategies
   passport.use(local);
+  /*
   passport.use(google);
   passport.use(facebook);
   passport.use(twitter);
