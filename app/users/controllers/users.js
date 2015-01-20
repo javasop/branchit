@@ -27,6 +27,7 @@ exports.login = passport.authenticate('local', {
 	  failureRedirect: "/users/failure"
 });
 exports.success = function(req,res){
+	//console.log(req.session.passport.user);
 	res.send(200);
 }
 exports.failure = function(req,res){
