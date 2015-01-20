@@ -8,8 +8,6 @@ var config = require('config');
 var Schema = mongoose.Schema;
 
 
-
-
 /**
  * Tutorial Schema
  */
@@ -18,14 +16,14 @@ var Schema = mongoose.Schema;
 var TutorialSchema = new Schema({
     //this will be the generated tutorial url where users can access the content or embed it in their site
     url: {type: String, trim: true},
-    title:{type: String, trim: true},
-    owner:{type: Schema.ObjectId, ref: 'User'},
-    learners:[{type: Schema.ObjectId, ref: 'User'}],
-    concepts:[{type: Schema.ObjectId, ref: 'Concept'}],
+    title: {type: String, trim: true},
+    owner: {type: Schema.ObjectId, ref: 'User'},
+    learners: [{type: Schema.ObjectId, ref: 'User'}],
+    concepts: [{type: Schema.ObjectId, ref: 'Concept'}],
     comment: [{
-            content: {type: String, default: ''},
-            user: {type: Schema.ObjectId, ref: 'User'},
-            createdAt: {type: Date, default: Date.now},
+        content: {type: String, default: ''},
+        user: {type: Schema.ObjectId, ref: 'User'},
+        createdAt: {type: Date, default: Date.now},
     }],
     meta: Schema.Types.Mixed,
     createdAt: {type: Date, default: Date.now}
@@ -41,7 +39,7 @@ var TutorialSchema = new Schema({
  * Pre-remove hook
  */
 
-TutorialSchema.pre('remove', function(next) {
+TutorialSchema.pre('remove', function (next) {
     next();
 });
 
@@ -58,7 +56,7 @@ TutorialSchema.methods = {
      * @api private
      */
 
-    uploadAndSave: function(images, cb) {
+    uploadAndSave: function (images, cb) {
 
     },
     /**
@@ -70,7 +68,7 @@ TutorialSchema.methods = {
      * @api private
      */
 
-    addComment: function(user, comment, cb) {
+    addComment: function (user, comment, cb) {
         var notify = require('../mailer');
 
         this.comments.push({
@@ -96,7 +94,7 @@ TutorialSchema.methods = {
      * @api private
      */
 
-    removeComment: function(commentId, cb) {
+    removeComment: function (commentId, cb) {
         var index = utils.indexof(this.comments, {id: commentId});
         if (~index)
             this.comments.splice(index, 1);
@@ -119,11 +117,11 @@ TutorialSchema.statics = {
      * @api private
      */
 
-    load: function(id, cb) {
+    load: function (id, cb) {
         this.findOne({_id: id})
-                .populate('user', 'name email username')
-                .populate('comments.user')
-                .exec(cb);
+            .populate('user', 'name email username')
+            .populate('comments.user')
+            .exec(cb);
     },
     /**
      * List articles
@@ -133,15 +131,15 @@ TutorialSchema.statics = {
      * @api private
      */
 
-    list: function(options, cb) {
+    list: function (options, cb) {
         var criteria = options.criteria || {}
 
         this.find(criteria)
-                .populate('user', 'name username')
-                .sort({'createdAt': -1}) // sort by date
-                .limit(options.perPage)
-                .skip(options.perPage * options.page)
-                .exec(cb);
+            .populate('user', 'name username')
+            .sort({'createdAt': -1}) // sort by date
+            .limit(options.perPage)
+            .skip(options.perPage * options.page)
+            .exec(cb);
     }
 }
 

@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -14,7 +13,7 @@ var Schema = mongoose.Schema;
 
 var TemplateSchema = new Schema({
 
-   createdAt: {type: Date, default: Date.now}
+    createdAt: {type: Date, default: Date.now}
 });
 /**
  * Validations
@@ -25,7 +24,7 @@ var TemplateSchema = new Schema({
  * Pre-remove hook
  */
 
-TemplateSchema.pre('remove', function(next) {
+TemplateSchema.pre('remove', function (next) {
     next();
 });
 /**
@@ -41,16 +40,16 @@ TemplateSchema.methods = {
      * @api private
      */
 
-    uploadAndSave: function(images, cb) {
+    uploadAndSave: function (images, cb) {
         if (!images || !images.length)
             return this.save(cb)
 
         var imager = new Imager(imagerConfig, 'S3');
         var self = this;
-        this.validate(function(err) {
+        this.validate(function (err) {
             if (err)
                 return cb(err);
-            imager.upload(images, function(err, cdnUri, files) {
+            imager.upload(images, function (err, cdnUri, files) {
                 if (err)
                     return cb(err);
                 if (files.length) {
@@ -76,11 +75,11 @@ TemplateSchema.statics = {
      * @api private
      */
 
-    load: function(id, cb) {
+    load: function (id, cb) {
         this.findOne({_id: id})
-                .populate('user', 'name email username')
-                .populate('comments.user')
-                .exec(cb);
+            .populate('user', 'name email username')
+            .populate('comments.user')
+            .exec(cb);
     },
     /**
      * List articles
@@ -90,15 +89,15 @@ TemplateSchema.statics = {
      * @api private
      */
 
-    list: function(options, cb) {
+    list: function (options, cb) {
         var criteria = options.criteria || {}
 
         this.find(criteria)
-                .populate('user', 'name username')
-                .sort({'createdAt': -1}) // sort by date
-                .limit(options.perPage)
-                .skip(options.perPage * options.page)
-                .exec(cb);
+            .populate('user', 'name username')
+            .sort({'createdAt': -1}) // sort by date
+            .limit(options.perPage)
+            .skip(options.perPage * options.page)
+            .exec(cb);
     }
 }
 

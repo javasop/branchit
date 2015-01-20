@@ -1,3 +1,4 @@
-{ "name" : "Example Hello Module"
-, "main" : "tutorials.js"
+{
+  "name": "Example Hello Module",
+  "main": "tutorials.js"
 }

@@ -5,10 +5,9 @@
  */
 
 // Third party libraries
-	var express = require('express')
-	, exports = module.exports = express()
-	, app = exports;
-
+var express = require('express')
+    , exports = module.exports = express()
+    , app = exports;
 
 
 // Local includes

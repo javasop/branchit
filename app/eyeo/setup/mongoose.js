@@ -12,11 +12,11 @@ var config = require('config');
 
 module.exports = function (mongoose) {
 // Connect to mongodb
-var connect = function () {
-  var options = { server: { socketOptions: { keepAlive: 1 } } };
-  mongoose.connect(config.app.db, options);
-};
-connect();
-mongoose.connection.on('error', console.log);
-mongoose.connection.on('disconnected', connect);
+    var connect = function () {
+        var options = {server: {socketOptions: {keepAlive: 1}}};
+        mongoose.connect(config.app.db, options);
+    };
+    connect();
+    mongoose.connection.on('error', console.log);
+    mongoose.connection.on('disconnected', connect);
 };

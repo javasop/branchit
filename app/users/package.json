@@ -1,3 +1,4 @@
-{ "name" : "Users  Module"
-, "main" : "users.js"
+{
+  "name": "Users  Module",
+  "main": "users.js"
 }

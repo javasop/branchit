@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -23,12 +22,12 @@ var UserSchema = new Schema({
     email: {type: String, default: ''},
     username: {type: String, default: ''},
     provider: {type: String, default: ''},
-    role:{type: String, default:''},
+    role: {type: String, default: ''},
     hashed_password: {type: String, default: ''},
     salt: {type: String, default: ''},
     authToken: {type: String, default: ''},
-    websites:[{
-       id:{type: Schema.ObjectId, ref: 'Website'}
+    websites: [{
+        id: {type: Schema.ObjectId, ref: 'Website'}
     }],
     facebook: {},
     twitter: {},
@@ -42,59 +41,59 @@ var UserSchema = new Schema({
  */
 
 UserSchema
-        .virtual('password')
-        .set(function(password) {
-            this._password = password;
-            this.salt = this.makeSalt();
-            this.hashed_password = this.encryptPassword(password);
-        })
-        .get(function() {
-            return this._password
-        });
+    .virtual('password')
+    .set(function (password) {
+        this._password = password;
+        this.salt = this.makeSalt();
+        this.hashed_password = this.encryptPassword(password);
+    })
+    .get(function () {
+        return this._password
+    });
 
 /**
  * Validations
  */
 
-var validatePresenceOf = function(value) {
+var validatePresenceOf = function (value) {
     return value && value.length;
 };
 
 // the below 5 validations only apply if you are signing up traditionally
 
-UserSchema.path('name').validate(function(name) {
+UserSchema.path('name').validate(function (name) {
     if (this.skipValidation())
         return true;
     return name.length;
 }, 'Name cannot be blank');
 
-UserSchema.path('email').validate(function(email) {
+UserSchema.path('email').validate(function (email) {
     if (this.skipValidation())
         return true;
     return email.length;
 }, 'Email cannot be blank');
 
-UserSchema.path('email').validate(function(email, fn) {
+UserSchema.path('email').validate(function (email, fn) {
     var User = mongoose.model('User');
     if (this.skipValidation())
         fn(true);
 
     // Check only when it is a new user or when email field is modified
     if (this.isNew || this.isModified('email')) {
-        User.find({email: email}).exec(function(err, users) {
+        User.find({email: email}).exec(function (err, users) {
             fn(!err && users.length === 0);
         });
     } else
         fn(true);
 }, 'Email already exists');
 
-UserSchema.path('username').validate(function(username) {
+UserSchema.path('username').validate(function (username) {
     if (this.skipValidation())
         return true;
     return username.length;
 }, 'Username cannot be blank');
 
-UserSchema.path('hashed_password').validate(function(hashed_password) {
+UserSchema.path('hashed_password').validate(function (hashed_password) {
     if (this.skipValidation())
         return true;
     return hashed_password.length;
@@ -105,7 +104,7 @@ UserSchema.path('hashed_password').validate(function(hashed_password) {
  * Pre-save hook
  */
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
     if (!this.isNew)
         return next();
 
@@ -129,7 +128,7 @@ UserSchema.methods = {
      * @api public
      */
 
-    authenticate: function(plainText) {
+    authenticate: function (plainText) {
         return this.encryptPassword(plainText) === this.hashed_password;
     },
     /**
@@ -139,7 +138,7 @@ UserSchema.methods = {
      * @api public
      */
 
-    makeSalt: function() {
+    makeSalt: function () {
         return Math.round((new Date().valueOf() * Math.random())) + '';
     },
     /**
@@ -150,14 +149,14 @@ UserSchema.methods = {
      * @api public
      */
 
-    encryptPassword: function(password) {
+    encryptPassword: function (password) {
         if (!password)
             return '';
         try {
             return crypto
-                    .createHmac('sha1', this.salt)
-                    .update(password)
-                    .digest('hex');
+                .createHmac('sha1', this.salt)
+                .update(password)
+                .digest('hex');
         } catch (err) {
             return '';
         }
@@ -166,7 +165,7 @@ UserSchema.methods = {
      * Validation is not required if using OAuth
      */
 
-    skipValidation: function() {
+    skipValidation: function () {
         return ~oAuthTypes.indexOf(this.provider);
     }
 };
@@ -184,13 +183,13 @@ UserSchema.statics = {
      * @api private
      */
 
-    load: function(options, cb) {
+    load: function (options, cb) {
         options.select = options.select || 'name username';
         this.findOne(options.criteria)
-                .select(options.select)
-                .exec(cb);
+            .select(options.select)
+            .exec(cb);
     }
 }
 
 mongoose.model('User', UserSchema);
-module.exports = exports = UserSchema;
+module.exports = exports = mongoose.model('User');

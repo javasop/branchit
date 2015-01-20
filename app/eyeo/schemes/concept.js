@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -13,8 +12,8 @@ var Schema = mongoose.Schema;
  */
 
 var ConceptSchema = new Schema({
-    title:{type: String, trim: true},
-    contributors:[{type: Schema.ObjectId, ref: 'User'}],
+    title: {type: String, trim: true},
+    contributors: [{type: Schema.ObjectId, ref: 'User'}],
     explanations: Schema.Types.Mixed,
     examples: Schema.Types.Mixed,
     exercises: Schema.Types.Mixed,
@@ -29,7 +28,7 @@ var ConceptSchema = new Schema({
  * Pre-remove hook
  */
 
-ConceptSchema.pre('remove', function(next) {
+ConceptSchema.pre('remove', function (next) {
     next();
 });
 /**
@@ -45,16 +44,16 @@ ConceptSchema.methods = {
      * @api private
      */
 
-    uploadAndSave: function(images, cb) {
+    uploadAndSave: function (images, cb) {
         if (!images || !images.length)
             return this.save(cb)
 
         var imager = new Imager(imagerConfig, 'S3');
         var self = this;
-        this.validate(function(err) {
+        this.validate(function (err) {
             if (err)
                 return cb(err);
-            imager.upload(images, function(err, cdnUri, files) {
+            imager.upload(images, function (err, cdnUri, files) {
                 if (err)
                     return cb(err);
                 if (files.length) {
@@ -80,11 +79,11 @@ ConceptSchema.statics = {
      * @api private
      */
 
-    load: function(id, cb) {
+    load: function (id, cb) {
         this.findOne({_id: id})
-                .populate('user', 'name email username')
-                .populate('comments.user')
-                .exec(cb);
+            .populate('user', 'name email username')
+            .populate('comments.user')
+            .exec(cb);
     },
     /**
      * List articles
@@ -94,15 +93,15 @@ ConceptSchema.statics = {
      * @api private
      */
 
-    list: function(options, cb) {
+    list: function (options, cb) {
         var criteria = options.criteria || {}
 
         this.find(criteria)
-                .populate('user', 'name username')
-                .sort({'createdAt': -1}) // sort by date
-                .limit(options.perPage)
-                .skip(options.perPage * options.page)
-                .exec(cb);
+            .populate('user', 'name username')
+            .sort({'createdAt': -1}) // sort by date
+            .limit(options.perPage)
+            .skip(options.perPage * options.page)
+            .exec(cb);
     }
 }
 
