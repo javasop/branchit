@@ -11,6 +11,10 @@ var express = require('express')
     , app = exports;
 
 
+var tutModel = require('./models/tutorials');
+var tutController = require('./controllers/tutorials');
+
+
 // Don't just use, but also export in case another module needs to use these as well.
 exports.callbacks = require('./controllers/tutorials');
 

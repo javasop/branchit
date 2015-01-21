@@ -43,7 +43,7 @@
     "glob": "^4.3.2"
   },
   "scripts": {
-    "start": "NODE_PATH=./config:./app/ NODE_ENV=development ./node_modules/.bin/nodemon server.js",
+    "start": "DEBUG=express:* NODE_PATH=./config:./app/ NODE_ENV=development ./node_modules/.bin/nodemon server.js",
     "test-mocha": "NODE_PATH=./config:./app/controllers NODE_ENV=test ./node_modules/.bin/mocha --reporter spec --timeout 10000 test/test-*.js",
     "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/",
     "prepublish": "npm prune",
