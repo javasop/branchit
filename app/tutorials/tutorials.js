@@ -13,7 +13,6 @@ var express = require('express')
 
 // Don't just use, but also export in case another module needs to use these as well.
 exports.callbacks = require('./controllers/tutorials');
-exports.models = require('./models');
 
 //-- For increased module encapsulation, you could also serve templates with module-local 
 //-- paths, but using shared layouts and partials may become tricky
@@ -23,4 +22,4 @@ exports.models = require('./models');
 //app.engine('handlebars', hbs.__express);
 
 // Module's Routes. Please note this is actually under /tutorials, because module is attached under /hello
-app.get('/', exports.callbacks.sayHello);
+app.get('/', exports.callbacks.getTutorials);

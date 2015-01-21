@@ -27,10 +27,13 @@ exports.login = passport.authenticate('local', {
 	  failureRedirect: "/users/failure"
 });
 exports.success = function(req,res){
-	//console.log(req.session.passport.user);
-	res.send(200);
+	res.sendStatus(200);
 }
 exports.failure = function(req,res){
-	res.send(401);
+	res.sendStatus(401);
 }
+exports.checkReq = function(req,res){
+	res.sendStatus(200);
+}
+
 

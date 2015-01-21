@@ -8,7 +8,7 @@ global config files handles environment specific options, such as connection inf
 
 
 TODO: 
-Finishing up CRUD
+Finishing up CRUD: implement crud for tutorials
 Routes display: Implement HATEOAS
 ACL module: check the authorization to access based on passport?
 

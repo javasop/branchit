@@ -14,4 +14,4 @@ var express = require('express')
 //var modHello = require('./hello');
 
 /** Global ROUTES **/
-//app.get('/globalhello', modHello.callbacks.sayHello);
+app.get('/globalhello', function(req,res){ res.send("well hello");   });
