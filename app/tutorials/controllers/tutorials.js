@@ -3,26 +3,6 @@ var mongoose = require('mongoose')
 var Tutorial = mongoose.model('Tutorial')
 
 
-exports.getTutorials = function (req, res) {
-
-    var name = req.param('name', '');
-
-    var context = {
-        siteTitle: "Node.js Bootstrap Demo Page"
-        , welcomeMessage: greeter.welcomeMessage(name)
-    };
-    res.send("send list of tutorials");
-
-
-    // More elaborate res.render() format:
-    //res.render(template, context, function(err, html) {
-    //  console.dir(err);
-    //  res.send(html);
-    //});
-
-    // Just responding with a string, without any template:
-    // res.send('Hello World');
-};
 /**
  * Load
  */
@@ -52,7 +32,7 @@ exports.index = function (req, res){
   Tutorial.list(options, function (err, tutorials) {
     if (err) return res.render('500');
     Tutorial.count().exec(function (err, count) {
-      res.render('tutorials/index', {
+      res.send({
         title: 'Tutorials',
         tutorials: tutorials,
         page: page + 1,
@@ -63,39 +43,30 @@ exports.index = function (req, res){
 };
 
 /**
- * New tutorial
- */
-
-exports.new = function (req, res){
-  res.render('tutorials/new', {
-    title: 'New Tutorial',
-    tutorial: new Tutorial({})
-  });
-};
-
-/**
  * Create a tutorial
  * Upload an image
  */
 
 exports.create = function (req, res) {
   var tutorial = new Tutorial(req.body);
-  var images = req.files.image
+/*  var images = req.files.image
     ? [req.files.image]
-    : undefined;
+    : undefined;*/
 
-  tutorial.user = req.user;
-  tutorial.uploadAndSave(images, function (err) {
-    if (!err) {
-      req.flash('success', 'Successfully created tutorial!');
-      return res.redirect('/tutorials/'+tutorial._id);
+  tutorial.owner = req.user;
+  tutorial.save(function (err) {
+    if (err){
+	  res.status(500);
+	  res.send(
+	  {
+		  error:err
+	  }
+	  );
     }
-    console.log(err);
-    res.render('tutorials/new', {
-      title: 'New Tutorial',
-      tutorial: tutorial,
-      errors: utils.errors(err.errors || err)
-    });
+    else{
+      res.send('Successfully created tutorial!');
+    }
+
   });
 };
 

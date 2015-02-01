@@ -2,6 +2,8 @@ var exports = module.exports;
 var passport = require('passport');
 var mongoose = require('mongoose')
     , User = mongoose.model('User')
+var acl = require("acl");
+
 
 
 exports.register = function (req, res) {

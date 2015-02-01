@@ -6,10 +6,11 @@ require('nodebootstrap-server').setup(function(runningApp) {
 
 	runningApp.use(require('eyeo'));
 
+	runningApp.use(require('acl'));
+
 	runningApp.use('/users',require('users'));
 
 	runningApp.use('/tutorials',require('tutorials')); // attach to sub-route
 
 	module.exports = runningApp;
-
 });

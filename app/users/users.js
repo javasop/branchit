@@ -12,9 +12,9 @@ var express = require('express')
     , exports = module.exports = express()
     , app = exports;
 
-
 var userModel = require('./models/users');
 var userController = require('./controllers/users');
+var acl = require("acl");
 
 
 require('./setup/passport')(passport);
@@ -27,6 +27,7 @@ app.use(passport.session());
 // Don't just use, but also export in case another module needs to use these as well.
 exports.callbacks = require('./controllers/users');
 exports.models = userModel;
+
 
 // Module's Routes. Please note this is actually under /users, because module is attached under /hello
 app.post('/', exports.callbacks.register);
