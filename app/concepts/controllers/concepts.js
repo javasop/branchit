@@ -1,17 +1,18 @@
 var exports = module.exports;
 var mongoose = require('mongoose')
-var Tutorial = mongoose.model('Tutorial')
-var extend = require('extend');
+var Concept = mongoose.model('Tutorial')
+
+
 /**
  * Load
  */
 
 exports.load = function (req, res, next, id){
   var User = mongoose.model('User');
-  Tutorial.load(id, function (err, tutorial) {
+  Concept.load(id, function (err, concept) {
     if (err) return next(err);
-    if (!tutorial) return next(new Error('not found'));
-    req.tutorial = tutorial;
+    if (!concept) return next(new Error('not found'));
+    req.concept = concept;
     next();
   });
 };
@@ -28,12 +29,12 @@ exports.index = function (req, res){
     page: page
   };
 
-  Tutorial.list(options, function (err, tutorials) {
+  Concept.list(options, function (err, concepts) {
     if (err) return res.render('500');
-    Tutorial.count().exec(function (err, count) {
+    Concept.count().exec(function (err, count) {
       res.send({
-        title: 'Tutorials',
-        tutorials: tutorials,
+        title: 'Concepts',
+        concepts: concepts,
         page: page + 1,
         pages: Math.ceil(count / perPage)
       });
@@ -42,18 +43,18 @@ exports.index = function (req, res){
 };
 
 /**
- * Create a tutorial
+ * Create a concept
  * Upload an image
  */
 
 exports.create = function (req, res) {
-  var tutorial = new Tutorial(req.body);
+  var concept = new Concept(req.body);
 /*  var images = req.files.image
     ? [req.files.image]
     : undefined;*/
 
-  tutorial.owner = req.user;
-  tutorial.save(function (err) {
+  concept.owner = req.user;
+  concept.save(function (err) {
     if (err){
 	  res.status(500);
 	  res.send(
@@ -63,32 +64,52 @@ exports.create = function (req, res) {
 	  );
     }
     else{
-      res.send(
-	{
-		Message:'Successfully created tutorial!',
-	        Tutorial: tutorial
-      	}
-      );
+      res.send('Successfully created concept!');
     }
 
   });
 };
 
+exports.fork = function (req, res) {
+  var concept = req.concept;
+/*  var images = req.files.image
+    ? [req.files.image]
+    : undefined;*/
+  concept.owner = req.user;
+  //reset contributors for the forked concept
+  concept.contributors = [];
+  concept.save(function (err) {
+    if (err){
+	  res.status(500);
+	  res.send(
+	  {
+		  error:err
+	  }
+	  );
+    }
+    else{
+      res.send('Successfully created concept!');
+    }
+
+  });
+};
+
+
 /**
- * Update tutorial
+ * Update concept
  */
 
 exports.update = function (req, res){
-  var tutorial = req.tutorial;
+  var concept = req.concept;
  /* var images = req.files.image
     ? [req.files.image]
     : undefined;
 */
   // make sure no one changes the user
   delete req.body.user;
-  tutorial = extend(tutorial, req.body);
+  concept = extend(concept, req.body);
 
-  tutorial.save(function (err) {
+  concept.save(function (err) {
     if (err){
 	  res.status(500);
 	  res.send(
@@ -98,7 +119,7 @@ exports.update = function (req, res){
 	  );
     }
     else{
-      res.send('Successfully created tutorial!');
+      res.send('Successfully created concept!');
     }
 
   });
@@ -110,19 +131,19 @@ exports.update = function (req, res){
 
 exports.show = function (req, res){
   res.send({
-    title: req.tutorial.title,
-    tutorial: req.tutorial
+    title: req.concept.title,
+    concept: req.concept
   }
   );
 };
 
 /**
- * Delete an tutorial
+ * Delete an concept
  */
 
 exports.destroy = function (req, res){
-  var tutorial = req.tutorial;
-  tutorial.remove(function (err){
+  var concept = req.concept;
+  concept.remove(function (err){
  	if (err){
 	  res.status(500);
 	  res.send(
@@ -132,12 +153,7 @@ exports.destroy = function (req, res){
 	  );
     	}
     else{
-      res.send(
-	{
-		Message:'Successfully deleted tutorial!',
-	        Tutorial: tutorial
-      	}
-      );
+      res.send('Successfully deleted concept!');
     }
 
 

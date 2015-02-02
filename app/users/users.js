@@ -8,21 +8,12 @@
 
 // Third-party libraries
 var express = require('express')
-    , passport = require('passport')
     , exports = module.exports = express()
     , app = exports;
 
 var userModel = require('./models/users');
 var userController = require('./controllers/users');
 var acl = require("acl");
-
-
-require('./setup/passport')(passport);
-
-
-// initialize passport
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Don't just use, but also export in case another module needs to use these as well.
 exports.callbacks = require('./controllers/users');
@@ -34,4 +25,4 @@ app.post('/', exports.callbacks.register);
 app.post('/login', exports.callbacks.login);
 app.get('/success', exports.callbacks.success);
 app.get('/failure', exports.callbacks.failure);
-app.get('/checkReq', exports.callbacks.checkReq);
+app.post('/checkReq',acl.login, exports.callbacks.checkReq);

@@ -15,7 +15,7 @@ var Schema = mongoose.Schema;
 //TODO: mix website model here?
 var TutorialSchema = new Schema({
     //this will be the generated tutorial url where users can access the content or embed it in their site
-    url: {type: String, trim: true},
+    embed_url: {type: String, trim: true},
     title: {type: String, trim: true},
     owner: {type: Schema.ObjectId, ref: 'User'},
     learners: [{type: Schema.ObjectId, ref: 'User'}],
@@ -33,7 +33,7 @@ var TutorialSchema = new Schema({
  * Validations
  */
 
-//TutorialSchema.path('title').required(true, 'Tutorial title cannot be blank');
+TutorialSchema.path('title').required(true, 'Tutorial title cannot be blank');
 
 /**
  * Pre-remove hook

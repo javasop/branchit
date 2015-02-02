@@ -9,4 +9,7 @@ global config files handles environment specific options, such as connection inf
 
 TODO: 
 Finishing up CRUD: implement crud for tutorials
+Add search to different routes (concepts, tutorials), I will use filter on client side for now
+Add a feature to only add and delete sub documents from routes, for now I am doing only atomic updates
+Implement Auth tokens for requests, We will probably disable checking auth for now
 Routes display: Implement HATEOAS

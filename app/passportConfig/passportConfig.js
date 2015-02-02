@@ -2,23 +2,30 @@
  * Module dependencies.
  */
 
+var express = require('express')
 var mongoose = require('mongoose');
 var LocalStrategy = require('passport-local').Strategy;
+var UserModel = require('users');
 var User = mongoose.model('User');
+var passport = require('passport')
+var local = require('./strategies/local')
+, mainApp = require('../../server')
+  , exports = module.exports = express()
+    , app = exports
 
-var local = require('./strategies/local');
+
+//add the main app file?
 //var google = require('./passport/google');
 //var facebook = require('./passport/facebook');
 //var twitter = require('./passport/twitter');
 //var linkedin = require('./passport/linkedin');
 //var github = require('./passport/github');
 
+// initialize passport
 
 /**
  * Expose
  */
-
-module.exports = function (passport) {
     // serialize sessions
     passport.serializeUser(function (user, done) {
         done(null, user.id)
@@ -32,6 +39,8 @@ module.exports = function (passport) {
 
     // use these strategies
     passport.use(local);
+
+
     /*
      passport.use(google);
      passport.use(facebook);
@@ -39,4 +48,3 @@ module.exports = function (passport) {
      passport.use(linkedin);
      passport.use(github);
      */
-};

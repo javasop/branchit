@@ -19,6 +19,7 @@
   "dependencies": {
     "config": "*",
     "express": "4.x",
+    "extend": "^2.0.0",
     "hbs": "2.x",
     "less": "2.x",
     "less-middleware": "*",
@@ -29,6 +30,7 @@
     "nodemon": "^1.2.1",
     "passport": "~0.2.1",
     "passport-local": "~1.0.0",
+    "supertest": "^0.15.0",
     "underscore": "1.x",
     "yaml": "*"
   },
