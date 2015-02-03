@@ -1,6 +1,7 @@
 var exports = module.exports;
 var mongoose = require('mongoose')
-var Concept = mongoose.model('Tutorial')
+var Concept = mongoose.model('Concept')
+var extend = require("extend");
 
 
 /**
@@ -64,20 +65,25 @@ exports.create = function (req, res) {
 	  );
     }
     else{
-      res.send('Successfully created concept!');
+      res.send(
+	{
+		Message:'Successfully created concept!',
+	        Concept: concept
+      	}
+      );
     }
 
   });
 };
 
 exports.fork = function (req, res) {
-  var concept = req.concept;
+  var con = req.concept;
+  var concept = new Concept(con);
 /*  var images = req.files.image
     ? [req.files.image]
     : undefined;*/
   concept.owner = req.user;
   //reset contributors for the forked concept
-  concept.contributors = [];
   concept.save(function (err) {
     if (err){
 	  res.status(500);
@@ -153,7 +159,12 @@ exports.destroy = function (req, res){
 	  );
     	}
     else{
-      res.send('Successfully deleted concept!');
+      res.send(
+	{
+		Message:'Successfully deleted concept!',
+	        Concept: concept
+      	}
+      );
     }
 
 

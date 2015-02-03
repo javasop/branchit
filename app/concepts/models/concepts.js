@@ -24,7 +24,7 @@ var ConceptSchema = new Schema({
 /**
  * Validations
  */
-
+ConceptSchema.path('title').required(true, 'Concept title cannot be blank');
 
 /**
  * Pre-remove hook

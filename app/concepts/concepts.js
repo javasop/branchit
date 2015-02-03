@@ -27,11 +27,11 @@
 	/* Concepts routes*/
 	app.param('id', conC.load);
 	app.get('/', conC.index);
-	app.post('/',acl.login, conC.create);
+	app.post('/', conC.create);
 	//this will fork the concept
-	app.post('/:id',acl.login,conC.fork);
+	app.post('/:id',conC.fork);
 	app.get('/:id', conC.show);
-	app.put('/:id',acl.concept, conC.update);
+	app.put('/:id', conC.update);
 	//we have to check the request, if it's delete it makes the owner only allowed to delete
-	app.delete('/:id', acl.concept, conC.destroy);
+	app.delete('/:id', conC.destroy);
 	

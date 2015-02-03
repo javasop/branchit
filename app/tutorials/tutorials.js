@@ -21,13 +21,7 @@
 	/* Tutorials routes*/
 	app.param('id', tutC.load);
 	app.get('/', tutC.index);
-	app.post('/', tutC.create);
 	app.get('/:id', tutC.show);
-	app.put('/:id', tutC.update);
-	app.delete('/:id', tutC.destroy);
-	
-/**
 	app.post('/',acl.login, tutC.create);
 	app.put('/:id', acl.tutorial, tutC.update);
 	app.delete('/:id', acl.tutorial, tutC.destroy);
-	**/
