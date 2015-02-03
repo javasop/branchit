@@ -26,12 +26,11 @@
 	// Module's Routes. Please note this is actually under /concepts, because module is attached under /hello
 	/* Concepts routes*/
 	app.param('id', conC.load);
-	app.get('/', conC.index);
-	app.post('/', conC.create);
+	app.get('/',  conC.index);
+	app.post('/',acl.login, conC.create);
 	//this will fork the concept
-	app.post('/:id',conC.fork);
+	app.post('/:id', acl.login, conC.fork);
 	app.get('/:id', conC.show);
-	app.put('/:id', conC.update);
+	app.put('/:id',acl.concept, conC.update);
 	//we have to check the request, if it's delete it makes the owner only allowed to delete
-	app.delete('/:id', conC.destroy);
-	
+	app.delete('/:id',acl.concept, conC.destroy);

@@ -35,6 +35,7 @@ exports.failure = function(req,res){
 	res.sendStatus(401);
 }
 exports.checkReq = function(req,res){
+	console.log(req.method);
 	res.sendStatus(200);
 }
 

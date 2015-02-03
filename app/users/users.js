@@ -25,4 +25,4 @@ app.post('/', exports.callbacks.register);
 app.post('/login', exports.callbacks.login);
 app.get('/success', exports.callbacks.success);
 app.get('/failure', exports.callbacks.failure);
-app.post('/checkReq',acl.login, exports.callbacks.checkReq);
+app.post('/checkReq', exports.callbacks.checkReq);
