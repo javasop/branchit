@@ -15,7 +15,7 @@ var ConceptSchema = new Schema({
     title: {type: String, trim: true},
     contributors: [{type: Schema.ObjectId, ref: 'User'}],
     owner: {type: Schema.ObjectId, ref: 'User'},
-    forkOf: [{type: Schema.ObjectId, ref: 'Concept'}],
+    forkOf: Schema.Types.Mixed,
     explanations: Schema.Types.Mixed,
     examples: Schema.Types.Mixed,
     exercises: Schema.Types.Mixed,

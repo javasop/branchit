@@ -75,16 +75,17 @@ exports.create = function (req, res) {
 
   });
 };
-
 exports.fork = function (req, res) {
   var con = req.concept;
-  var concept = new Concept(con);
+  con.forkOf = req.concept._id;
+  con._id = mongoose.Types.ObjectId();
+  con.isNew = true;
+  con.owner = req.user;
 /*  var images = req.files.image
     ? [req.files.image]
     : undefined;*/
-  concept.owner = req.user;
   //reset contributors for the forked concept
-  concept.save(function (err) {
+  con.save(function (err) {
     if (err){
 	  res.status(500);
 	  res.send(
@@ -94,7 +95,12 @@ exports.fork = function (req, res) {
 	  );
     }
     else{
-      res.send('Successfully created concept!');
+	res.send(
+	{
+		Message:'Successfully created concept!',
+	        Concept: con
+      	}
+        );
     }
 
   });

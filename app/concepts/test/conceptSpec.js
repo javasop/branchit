@@ -50,7 +50,6 @@ describe('Concepts', function () {
             before(function (done) {
                 Concept.count(function (err, cnt) {
                     count = cnt
-	            console.log(cnt);
                     done()
                 })
             })
@@ -69,7 +68,6 @@ describe('Concepts', function () {
 			    }
 			 
 			    conId = res.body.Concept._id;
-			    console.log(conId);
 
 		    }
             })
@@ -87,7 +85,6 @@ describe('Concepts', function () {
                     done()
                 })
             })
-	    /**/
    	    it('should return ok when forking', function (done) {
                 request(app)
                     .post('/concepts/'+conId)
@@ -96,7 +93,6 @@ describe('Concepts', function () {
                     .end(done)
 
 		    function hasId(res){
-			    console.log(res);
 			    if(!res.body.Concept._id){
 				    throw new Error("concept doesn't contain id");
 			    }
@@ -154,6 +150,10 @@ describe('Concepts', function () {
     })
      after(function (done) {
         Concept.find({title: 'test'}).remove().exec(function (err) {
+            if (!err)
+                done();
+        });
+	Concept.findOne({_id: fconId}).remove().exec(function (err) {
             if (!err)
                 done();
         });
