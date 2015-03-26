@@ -8,6 +8,7 @@ global config files handles environment specific options, such as connection inf
 
 
 TODO: 
+add an admin module which will take the list of dbs and do a crud on all of them
 Finishing up CRUD: implement crud for tutorials
 Add search to different routes (concepts, tutorials), I will use filter on client side for now
 Add a feature to only add and delete sub documents from routes, for now I am doing only atomic updates
