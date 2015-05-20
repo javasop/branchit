@@ -14,16 +14,3 @@ var express = require('express')
     , app = exports
 
 require('./setup/mongoose')(mongoose);
-
-/*export all the schemas as objects after registering them 
-fs.readdirSync(__dirname + '/schemes/').forEach(function (file) {
-    //ignore files with name "index"
-    if (~file.indexOf('.js') && file.indexOf('index') == -1) {
-        filename = __dirname + '/schemes/' + file;
-        var obj = require(filename)
-        var ffile = file.replace(".js", "");
-        exports[ffile] = obj;
-    }
-
-});
-*/

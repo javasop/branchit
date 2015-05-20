@@ -1,0 +1,5 @@
+{
+   "port": 4000,
+  "cookie_secret": "Your secret key salt goes here. Replace with random, long string in your project.",
+  "db": "mongodb://javasop:osamah1989@ds063160.mongolab.com:63160/itechdom"
+}

@@ -1,9 +1,5 @@
-[![GitHub Link](https://img.shields.io/github/stars/inadarei/nodebootstrap.svg?style=flat)](https://github.com/inadarei/nodebootstrap)
-![npm version](https://img.shields.io/npm/v/nodebootstrap.svg?style=flat)
+![npm version](https://img.shields.io/npm/v/nodebootstrap.svg)
 ![build status](https://travis-ci.org/inadarei/nodebootstrap.svg?branch=master)
-[![Codacy Badge](https://www.codacy.com/project/badge/41c49bb9c9384b7e8042f1e6c9645431)](https://www.codacy.com/public/irakli/nodebootstrap_2)
-[![Code Climate](https://codeclimate.com/github/inadarei/nodebootstrap/badges/gpa.svg)](https://codeclimate.com/github/inadarei/nodebootstrap)
-![dependencies](https://img.shields.io/david/inadarei/nodebootstrap.svg?style=flat)
 
 NodeBootstrap is a project skeleton for [Node.js](http://nodejs.org/)/[Express.js](http://expressjs.com)
 development. It captures common best-practices, used by Node community, for project layout and setup configuration.
@@ -171,7 +167,7 @@ make upgrade path smoother.
 
 (The MIT License)
 
-Copyright (c) 2012-2015 Irakli Nadareishvili [@inadarei](http://twitter.com/inadarei)
+Copyright (c) 2012-2014 Irakli Nadareishvili [@inadarei](http://twitter.com/inadarei)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

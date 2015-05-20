@@ -1,26 +1,15 @@
-require('nodebootstrap-server').setup(function(runningApp) {
+var express = require('express')
+, exports = module.exports = express()
+    , app = exports;
 
-	//---- Mounting well-encapsulated application modules
-	//---- See: http://vimeo.com/56166857
-	//
-//TODO: separate this into its own module (name it main config?)
-var passport = require('passport')
-    runningApp.use(passport.initialize());
-    runningApp.use(passport.session());
+//main config
+require("./config")(app);
 
- 	runningApp.use(require('passportConfig'));
+//global routes
+app.use(require('routes'));
 
-	runningApp.use(require('routes')); // attach to root rout
 
-	runningApp.use(require('acl'));
+app.use("/user",require('user'));
+app.use("/blog",require('blog'));
+app.use("/info",require('routeMaster'));
 
-	runningApp.use(require('eyeo'));
-
-	runningApp.use('/users',require('users'));
-
-	runningApp.use('/tutorials',require('tutorials')); // attach to sub-route
-
-	runningApp.use('/concepts',require('concepts')); // attach to sub-route
-
-	module.exports = runningApp;
-});

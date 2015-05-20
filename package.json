@@ -1,9 +1,9 @@
 {
-  "name": "nodebootstrap",
-  "version": "1.2.2",
+  "name": "Branchit",
+  "version": "1.1.0",
   "private": true,
-  "description": "Node/Express.js Project Boilerplate with Twitter Bootstrap and other goodies",
-  "author": "Irakli Nadareishvili",
+  "description": "Main Learning System",
+  "author": "Osama Alghanmi",
   "license": {
     "type": "MIT",
     "url": "https://github.com/inadarei/nodebootstrap/blob/master/LICENSE"
@@ -14,41 +14,42 @@
     "url": "https://github.com/inadarei/nodebootstrap"
   },
   "engines": {
-    "node": ">=0.8.8"
+    "node": ">=0.8.8",
+    "npm": ">=1.4.28"
   },
   "dependencies": {
+    "body-parser": "^1.12.2",
     "config": "*",
     "express": "4.x",
+    "express-session": "^1.10.4",
     "extend": "^2.0.0",
     "hbs": "2.x",
-    "less": "2.x",
+    "less": "1.x",
     "less-middleware": "*",
     "metalogger": "*",
-    "mongoose": "~3.8.21",
-    "nodebootstrap-clustering": "*",
-    "nodebootstrap-server": "*",
-    "nodemon": "^1.2.1",
-    "passport": "~0.2.1",
-    "passport-local": "~1.0.0",
-    "supertest": "^0.15.0",
+    "mongoose": "^4.0.1",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0",
+    "robots.txt": "^1.1.0",
+    "sitemap": "^0.8.1",
     "underscore": "1.x",
     "yaml": "*"
   },
   "devDependencies": {
     "after": "^0.8.1",
-    "istanbul": "^0.3.2",
-    "mocha": "^2.1.0",
     "chai": "^1.9.1",
-    "should": "^4.4.4",
+    "commander": "",
+    "glob": "",
+    "istanbul": "^0.3.2",
     "jshint": "^2.5.x",
-    "commander": "^2.6.0",
-    "glob": "^4.3.2"
+    "mocha": "^1.21.4",
+    "should": "~4.0.4",
+    "supertest": "^0.15.0"
   },
   "scripts": {
-    "start": "NODE_PATH=./config:./app/ NODE_ENV=development ./node_modules/.bin/nodemon server.js",
-    "test-mocha": "NODE_PATH=./config:./app/controllers NODE_ENV=test ./node_modules/.bin/mocha --reporter spec --timeout 10000 test/test-*.js",
-    "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/",
     "prepublish": "npm prune",
+    "test-mocha": "NODE_PATH=./config:./app/ NODE_ENV=test mocha --reporter spec --timeout 10000 test/*.js",
+    "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/",
     "pretest": "jshint lib test",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --require test/support/env --reporter dot --check-leaks test/ test/acceptance/",
     "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --require test/support/env --reporter spec --check-leaks test/ test/acceptance/"
