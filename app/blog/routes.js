@@ -56,6 +56,3 @@ module.exports = function (app,Controller) {
 	return routes;
 
 };
-
-
-

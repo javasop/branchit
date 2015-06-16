@@ -14,22 +14,9 @@ module.exports = function (runningApp) {
     var robots = require('robots.txt')
     var sm = require('sitemap');
 
-
-
     // Pass in the absolute path to your robots.txt file
     runningApp.use(robots(__dirname + '/robots.txt'))
 
-
-    //pass sitemap if it's requested
-        , sitemap = sm.createSitemap ({
-        hostname: 'http://www.itechdom.com',
-        cacheTime: 600000,        // 600 sec - cache purge period
-        urls: [
-            { url: '/' },
-            { url: '/#!/about' },
-            { url: '/#!/blog' }
-        ]
-    });
 
     runningApp.get('/sitemap.xml', function(req, res) {
         sitemap.toXML( function (xml) {
